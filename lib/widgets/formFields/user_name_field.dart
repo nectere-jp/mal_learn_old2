@@ -11,6 +11,3 @@ class UserNameField extends StatelessWidget {
     );
   }
 }
-
-//TODO: autofill hints
-//TODO: validator

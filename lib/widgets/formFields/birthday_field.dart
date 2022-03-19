@@ -11,6 +11,3 @@ class BirthdayField extends StatelessWidget {
     );
   }
 }
-
-//TODO: autofill hints
-//TODO: validator

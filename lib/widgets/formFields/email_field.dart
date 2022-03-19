@@ -12,6 +12,3 @@ class EmailField extends StatelessWidget {
     );
   }
 }
-
-//TODO: autofill hints
-//TODO: validator

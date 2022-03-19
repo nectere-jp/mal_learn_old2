@@ -12,6 +12,3 @@ class PasswordField extends StatelessWidget {
     );
   }
 }
-
-//TODO: autofill hints
-//TODO: validator

@@ -28,13 +28,13 @@ class IconPicker extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              child: const Icon(Icons.add, color: Colors.white),
+            DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.deepOrange,
                 border: Border.all(color: Colors.white),
               ),
+              child: const Icon(Icons.add, color: Colors.white),
             ),
           ],
         ),

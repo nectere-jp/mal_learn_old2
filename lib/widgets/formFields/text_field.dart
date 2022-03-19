@@ -9,7 +9,7 @@ TextFormField textField({
     decoration: InputDecoration(
       labelText: label,
       labelStyle: const TextStyle(
-        fontSize: 16.0,
+        fontSize: 16,
         color: Colors.teal,
       ),
       contentPadding: const EdgeInsets.only(bottom: 4),

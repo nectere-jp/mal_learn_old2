@@ -15,6 +15,10 @@ class SubmitButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: MaterialButton(
+        color: Colors.deepOrange.shade700,
+        shape: const StadiumBorder(),
+        height: 40,
+        onPressed: onPressed,
         child: Text(
           labelText,
           style: const TextStyle(
@@ -23,10 +27,6 @@ class SubmitButton extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        color: Colors.deepOrange.shade700,
-        shape: const StadiumBorder(),
-        height: 40,
-        onPressed: onPressed,
       ),
     );
   }

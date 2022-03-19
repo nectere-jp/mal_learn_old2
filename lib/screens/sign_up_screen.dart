@@ -21,15 +21,17 @@ class SignUpScreen extends StatelessWidget {
 
   Widget body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text('アカウントを作成',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              )),
+          const Text(
+            'アカウントを作成',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
+          ),
           const Text('これらの情報は、設定>情報からいつでも編集できます。'),
           const Expanded(child: SizedBox(height: 32)),
           const IconPicker(),
