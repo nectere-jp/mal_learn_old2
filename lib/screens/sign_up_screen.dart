@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mal_learn/screens/sign_in_screen.dart';
 import 'package:mal_learn/widgets/FormFields/form_items.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -51,10 +52,22 @@ class SignUpScreen extends StatelessWidget {
             onPressed: () {},
           ),
           const SizedBox(height: 16),
-          const Center(
-            child: Text(
-              'すでにアカウントをお持ちの場合はこちら',
-              style: TextStyle(decoration: TextDecoration.underline),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<Scaffold>(
+                    builder: (context) => const SignInScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'アカウントをお持ちの方はこちら',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 42),
