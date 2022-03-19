@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/screens/sign_in_screen.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
 
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 }
 
 class App extends StatelessWidget {
