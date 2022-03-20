@@ -19,7 +19,7 @@ class UserNameField extends ConsumerWidget {
       keyboardType: TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: userNameValidator,
-      onSaved: (value) {
+      onChanged: (value) {
         ref.read(userNameProvider.notifier).state = value;
       },
     );

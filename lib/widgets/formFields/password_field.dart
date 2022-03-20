@@ -19,7 +19,7 @@ class PasswordField extends ConsumerWidget {
       obscureText: true,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: passwordValidator,
-      onSaved: (value) {
+      onChanged: (value) {
         ref.read(passwordProvider.notifier).state = value;
       },
     );

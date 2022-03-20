@@ -20,7 +20,7 @@ class EmailField extends ConsumerWidget {
       keyboardType: TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: emailValidator,
-      onSaved: (value) {
+      onChanged: (value) {
         ref.read(emailProvider.notifier).state = value;
       },
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/providers/form_data_providers.dart';
+import 'package:mal_learn/repositories/repository.dart';
 import 'package:mal_learn/screens/sign_in_screen.dart';
 import 'package:mal_learn/widgets/FormFields/form_items.dart';
 
@@ -56,7 +58,7 @@ class SignUpScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   TermsCheckbox(context: context),
                   const SizedBox(height: 24),
-                  submitButton(context),
+                  submitButton(context, ref),
                   const SizedBox(height: 16),
                   linkToSignInPage(context),
                   const SizedBox(height: 24),
@@ -69,10 +71,10 @@ class SignUpScreen extends ConsumerWidget {
     );
   }
 
-  Widget submitButton(BuildContext context) {
+  Widget submitButton(BuildContext context, WidgetRef ref) {
     return SubmitButton(
       labelText: 'アカウントを作成',
-      onPressed: () => onSignUp(context),
+      onPressed: () => onSignUp(context, ref),
     );
   }
 
@@ -97,11 +99,25 @@ class SignUpScreen extends ConsumerWidget {
     );
   }
 
-  void onSignUp(BuildContext context) {
+  void onSignUp(BuildContext context, WidgetRef ref) {
     try {
       if (_formKey.currentState?.validate() != true) {
         return;
       }
+
+      final userName = ref.read(userNameProvider)!;
+      final email = ref.read(emailProvider)!;
+      final password = ref.read(passwordProvider)!;
+      final birthday = ref.read(birthdayProvider)!;
+      final iconPath = ref.read(iconPathProvider)!;
+
+      repository.signUp(
+        userName: userName,
+        email: email,
+        password: password,
+        birthday: birthday,
+        iconPath: iconPath,
+      );
     } on Exception catch (e) {
       showDialog<AlertDialog>(
         context: context,

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/providers/form_data_providers.dart';
+import 'package:mal_learn/repositories/repository.dart';
 import 'package:mal_learn/screens/sign_up_screen.dart';
 import 'package:mal_learn/widgets/FormFields/form_items.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends ConsumerWidget {
   SignInScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: appBar(),
-      body: SafeArea(child: body(context)),
+      body: SafeArea(child: body(context, ref)),
     );
   }
 
@@ -22,7 +25,7 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget body(BuildContext context) {
+  Widget body(BuildContext context, WidgetRef ref) {
     return Form(
       key: _formKey,
       child: Padding(
@@ -50,7 +53,7 @@ class SignInScreen extends StatelessWidget {
             const SizedBox(height: 24),
             const PasswordField(),
             const SizedBox(height: 24),
-            submitButton(context),
+            submitButton(context, ref),
             const SizedBox(height: 16),
             linkToSignUpPage(context),
             const SizedBox(height: 16),
@@ -60,10 +63,10 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget submitButton(BuildContext context) {
+  Widget submitButton(BuildContext context, WidgetRef ref) {
     return SubmitButton(
       labelText: 'ログイン',
-      onPressed: () => onSignIn(context),
+      onPressed: () => onSignIn(context, ref),
     );
   }
 
@@ -88,11 +91,16 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  void onSignIn(BuildContext context) {
+  void onSignIn(BuildContext context, WidgetRef ref) {
     try {
       if (_formKey.currentState?.validate() != true) {
         return;
       }
+
+      final email = ref.read(emailProvider)!;
+      final password = ref.read(passwordProvider)!;
+
+      repository.signIn(email: email, password: password);
     } on Exception catch (e) {
       showDialog<AlertDialog>(
         context: context,
