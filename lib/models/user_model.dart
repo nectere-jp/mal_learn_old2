@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserModel {
-  UserModel(this.user) {
-    fetchUserInfo();
-  }
+  UserModel(this.user);
 
   final User user;
-  late final String? userName;
-  late final DateTime? birthday;
-  late final Image? icon;
+  String? userName;
+  DateTime? birthday;
+  Image? icon;
 
   Future<void> fetchUserInfo() async {
     final document = await FirebaseFirestore.instance
@@ -18,12 +16,16 @@ class UserModel {
         .doc(user.uid)
         .get();
 
-    userName = document['displayName'] as String?;
-    birthday = (document['birthday'] as Timestamp?)?.toDate();
+    final data = document.data();
 
-    final src = document['iconPath'] as String?;
+    userName = data?['userName'] as String?;
+    birthday = (data?['birthday'] as Timestamp?)?.toDate();
+
+    final src = data?['iconPath'] as String?;
     if (src != null) {
       icon = Image.network(src);
+    } else {
+      icon = Image.asset('assets/images/default_icon.png');
     }
   }
 }
