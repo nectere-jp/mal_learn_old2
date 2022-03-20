@@ -1,7 +1,74 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/providers/form_data_providers.dart';
 
-class IconPicker extends StatelessWidget {
-  const IconPicker({Key? key}) : super(key: key);
+class IconPicker extends FormField<String> {
+  IconPicker({
+    Key? key,
+    required WidgetRef ref,
+    required BuildContext context,
+  }) : super(
+          key: key,
+          builder: _IconPickerFunctions(ref: ref, context: context).builder,
+          validator: _IconPickerFunctions.birthdayValidator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+        );
+}
+
+class _IconPickerFunctions {
+  _IconPickerFunctions({required this.ref, required this.context});
+
+  final WidgetRef ref;
+  final BuildContext context;
+
+  Widget builder(FormFieldState<String> state) {
+    final iconPath = ref.watch(iconPathProvider);
+    return Column(
+      children: [
+        _IconButton(
+          onPressed: () {
+            selectImage(state);
+          },
+          image: AssetImage(iconPath ?? 'assets/images/default_icon.png'),
+        ),
+        Text(
+          state.errorText ?? '',
+          style: TextStyle(color: Theme.of(context).errorColor),
+        ),
+      ],
+    );
+  }
+
+  Future<void> selectImage(FormFieldState<String> state) async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null) {
+      final path = result.files.single.path!;
+
+      state.didChange(path);
+      ref.read(iconPathProvider.notifier).state = path;
+    }
+  }
+
+  static String? birthdayValidator(String? value) {
+    if (value == null) {
+      return 'アイコンを選択してください';
+    } else {
+      return null;
+    }
+  }
+}
+
+class _IconButton extends StatelessWidget {
+  const _IconButton({
+    required this.onPressed,
+    required this.image,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback onPressed;
+  final ImageProvider image;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +85,13 @@ class IconPicker extends StatelessWidget {
                 ),
                 padding: EdgeInsets.zero,
               ),
-              onPressed: () {},
-              child: const ClipOval(
+              onPressed: onPressed,
+              child: ClipOval(
                 child: Image(
                   width: 95,
                   height: 95,
-                  image: AssetImage('assets/images/default_icon.png'),
-                  fit: BoxFit.contain,
+                  image: image,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

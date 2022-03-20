@@ -17,7 +17,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Mal Learn',
       theme: ThemeData(primarySwatch: Colors.orange),
-      home: const SignInScreen(),
+      home: SignInScreen(),
     );
   }
 }
