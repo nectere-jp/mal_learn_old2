@@ -54,7 +54,7 @@ class SignUpScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   BirthdayField(context: context, ref: ref),
                   const SizedBox(height: 24),
-                  const TermsCheckbox(),
+                  TermsCheckbox(context: context),
                   const SizedBox(height: 24),
                   submitButton(context),
                   const SizedBox(height: 16),

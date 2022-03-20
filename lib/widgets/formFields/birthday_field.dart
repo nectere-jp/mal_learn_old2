@@ -10,7 +10,10 @@ class BirthdayField extends FormField<DateTime> {
     required WidgetRef ref,
   }) : super(
           key: key,
-          builder: _BirthdayFieldFunctions(context: context, ref: ref).builder,
+          builder: _BirthdayFieldFunctions(
+            context: context,
+            ref: ref,
+          ).builder,
           validator: _BirthdayFieldFunctions.birthdayValidator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
         );
