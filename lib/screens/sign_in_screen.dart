@@ -11,7 +11,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: body(context),
+      body: SafeArea(child: body(context)),
     );
   }
 
@@ -37,7 +37,7 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 64),
+            const SizedBox(height: 24),
             const Text(
               'ログイン',
               style: TextStyle(
@@ -45,15 +45,15 @@ class SignInScreen extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             const EmailField(),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             const PasswordField(),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             submitButton(context),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             linkToSignUpPage(context),
-            const SizedBox(height: 42),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -63,7 +63,7 @@ class SignInScreen extends StatelessWidget {
   Widget submitButton(BuildContext context) {
     return SubmitButton(
       labelText: 'ログイン',
-      onPressed: () {},
+      onPressed: () => onSignIn(context),
     );
   }
 
