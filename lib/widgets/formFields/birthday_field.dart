@@ -33,6 +33,11 @@ class _BirthdayFieldFunctions {
   var _showingDatePicker = false;
 
   Widget builder(FormFieldState<DateTime> state) {
+    final date = ref.watch(birthdayProvider);
+    _controller.value = _controller.value.copyWith(
+      text: date != null ? '${date.year}年${date.month}月${date.day}日' : null,
+    );
+
     return Focus(
       child: TextField(
         controller: _controller,
@@ -67,9 +72,6 @@ class _BirthdayFieldFunctions {
       onConfirm: (date) {
         state.didChange(date);
         ref.read(birthdayProvider.notifier).state = date;
-        _controller.value = _controller.value.copyWith(
-          text: '${date.year}年${date.month}月${date.day}日',
-        );
 
         _showingDatePicker = false;
         FocusManager.instance.primaryFocus?.unfocus();

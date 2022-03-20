@@ -10,7 +10,10 @@ class IconPicker extends FormField<String> {
     required BuildContext context,
   }) : super(
           key: key,
-          builder: _IconPickerFunctions(ref: ref, context: context).builder,
+          builder: _IconPickerFunctions(
+            ref: ref,
+            context: context,
+          ).builder,
           validator: _IconPickerFunctions.birthdayValidator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
         );
