@@ -13,7 +13,7 @@ class SignUpScreen extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBar(),
-      body: body(context, ref),
+      body: SafeArea(child: body(context, ref)),
     );
   }
 

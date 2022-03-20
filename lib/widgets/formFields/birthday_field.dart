@@ -27,6 +27,8 @@ class _BirthdayFieldFunctions {
 
   final _controller = TextEditingController();
 
+  var _showingDatePicker = false;
+
   Widget builder(FormFieldState<DateTime> state) {
     return Focus(
       child: TextField(
@@ -43,7 +45,7 @@ class _BirthdayFieldFunctions {
         readOnly: true,
       ),
       onFocusChange: (hasFocus) {
-        if (hasFocus) {
+        if (!_showingDatePicker) {
           selectDate(state);
         }
       },
@@ -53,32 +55,29 @@ class _BirthdayFieldFunctions {
   Future<void> selectDate(
     FormFieldState<DateTime> state,
   ) async {
-    DateTime? birthday;
-
+    _showingDatePicker = true;
     await DatePicker.showDatePicker(
       context,
       showTitleActions: true,
       minTime: DateTime(DateTime.now().year - 120),
       maxTime: DateTime.now(),
       onConfirm: (date) {
-        birthday = date;
+        state.didChange(date);
+        ref.read(birthdayProvider.notifier).state = date;
+        _controller.value = _controller.value.copyWith(
+          text: '${date.year}年${date.month}月${date.day}日',
+        );
+
+        _showingDatePicker = false;
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       onCancel: () {
+        _showingDatePicker = false;
         FocusManager.instance.primaryFocus?.unfocus();
       },
       currentTime: DateTime(DateTime.now().year - 16),
       locale: LocaleType.jp,
     );
-
-    if (birthday != null) {
-      state.didChange(birthday);
-      ref.read(birthdayProvider.notifier).state = birthday;
-      _controller.value = _controller.value.copyWith(
-        text: '${birthday!.year}年${birthday!.month}月${birthday!.day}日',
-      );
-
-      FocusManager.instance.primaryFocus?.unfocus();
-    }
   }
 
   static String? birthdayValidator(DateTime? value) {
