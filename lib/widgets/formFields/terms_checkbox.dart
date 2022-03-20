@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mal_learn/widgets/show_terms_modal.dart';
 
 class TermsCheckbox extends FormField<bool> {
   TermsCheckbox({
@@ -35,12 +36,26 @@ class _TermsCheckboxFunctions {
                 },
               ),
             ),
-            const Text('利用規約に同意します'),
+            TextButton(
+              onPressed: () => showTermModal(context),
+              style: TextButton.styleFrom(padding: EdgeInsets.zero),
+              child: const Text(
+                '利用規約',
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            const Text('に同意します'),
           ],
         ),
         Text(
           state.errorText ?? '',
-          style: TextStyle(color: Theme.of(context).errorColor),
+          style: TextStyle(
+            color: Theme.of(context).errorColor,
+            height: state.errorText == null ? 0 : null,
+          ),
         )
       ],
     );
