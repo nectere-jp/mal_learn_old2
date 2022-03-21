@@ -16,7 +16,7 @@ class UserNameField extends ConsumerWidget {
         ),
         contentPadding: EdgeInsets.only(bottom: 4),
       ),
-      keyboardType: TextInputType.emailAddress,
+      autofillHints: const [AutofillHints.username],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: userNameValidator,
       onChanged: (value) {

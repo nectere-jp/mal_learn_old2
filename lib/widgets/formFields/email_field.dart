@@ -18,6 +18,7 @@ class EmailField extends ConsumerWidget {
         contentPadding: EdgeInsets.only(bottom: 4),
       ),
       keyboardType: TextInputType.emailAddress,
+      autofillHints: const [AutofillHints.email],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: emailValidator,
       onChanged: (value) {

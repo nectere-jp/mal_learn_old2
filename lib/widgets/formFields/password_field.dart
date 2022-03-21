@@ -17,6 +17,7 @@ class PasswordField extends ConsumerWidget {
         contentPadding: EdgeInsets.only(bottom: 4),
       ),
       obscureText: true,
+      autofillHints: const [AutofillHints.password],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: passwordValidator,
       onChanged: (value) {
