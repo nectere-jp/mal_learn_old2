@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/providers/form_data_providers.dart';
-import 'package:mal_learn/repositories/repository.dart';
+import 'package:mal_learn/providers/repository_provider.dart';
 import 'package:mal_learn/screens/chat_list_screen.dart';
 import 'package:mal_learn/screens/sign_in_screen.dart';
 import 'package:mal_learn/widgets/FormFields/form_items.dart';
@@ -101,6 +101,8 @@ class SignUpScreen extends ConsumerWidget {
   }
 
   Future<void> onSignUp(BuildContext context, WidgetRef ref) async {
+    final repository = ref.read(repositoryProvider);
+
     try {
       if (_formKey.currentState?.validate() != true) {
         return;

@@ -3,8 +3,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Repository {
+  Repository(this.read);
+
+  final Reader read;
+
   Future<void> signUp({
     required String userName,
     required String email,
@@ -41,5 +46,3 @@ class Repository {
         .signInWithEmailAndPassword(email: email, password: password);
   }
 }
-
-final repository = Repository();
