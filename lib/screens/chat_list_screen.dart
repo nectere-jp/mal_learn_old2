@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/models/room_summary_model.dart';
+import 'package:mal_learn/providers/repository_provider.dart';
+import 'package:mal_learn/providers/user_provider.dart';
 
 class ChatListScreen extends ConsumerWidget {
   const ChatListScreen({Key? key}) : super(key: key);
@@ -8,7 +11,7 @@ class ChatListScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: appBar(),
-      body: body(),
+      body: body(ref),
     );
   }
 
@@ -48,39 +51,55 @@ class ChatListScreen extends ConsumerWidget {
     );
   }
 
-  Widget body() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          serchField(),
-          const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return chatListTile();
-              },
-            ),
+  Widget body(WidgetRef ref) {
+    final repository = ref.read(repositoryProvider);
+    final userModel = ref.watch(userModelProvider).value;
+
+    if (userModel == null) {
+      return const Center(child: Text('エラーが発生しました。アプリを再起動してください'));
+    }
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: serchField(),
+        ),
+        const SizedBox(height: 10),
+        Expanded(
+          child: StreamBuilder(
+            stream: repository.getRoomList(userModel),
+            builder: (context, AsyncSnapshot<List<RoomSummaryModel>> snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data!;
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return chatListTile(data[index]);
+                  },
+                );
+              } else {
+                return const Center(child: Text('Loading'));
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Widget chatListTile() {
+  Widget chatListTile(RoomSummaryModel room) {
     return ListTile(
-      title: const Text(
-        'チャット名',
-        style: TextStyle(
+      title: Text(
+        room.name ?? '',
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),
       ),
-      subtitle: const Text('養田まじでクビにしたい'),
+      subtitle: room.lastMessage != null ? Text(room.lastMessage!) : null,
       leading: ClipOval(
-        child: Image.network(
-          'https://newsatcl-pctr.c.yimg.jp/r/iwiz-amd/20220308-00000020-sasahi-000-1-view.jpg?pri=l&w=625&h=640&exp=10800',
-        ),
+        child: room.icon,
       ),
       trailing: Padding(
         padding: const EdgeInsets.only(right: 8),
@@ -90,6 +109,7 @@ class ChatListScreen extends ConsumerWidget {
         ),
       ),
       onTap: () {},
+      contentPadding: const EdgeInsets.symmetric(horizontal: 30),
     );
   }
 

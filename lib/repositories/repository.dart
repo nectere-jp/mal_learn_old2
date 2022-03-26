@@ -1,14 +1,19 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/models/room_summary_model.dart';
+import 'package:mal_learn/models/user_model.dart';
+import 'package:mal_learn/providers/user_provider.dart';
 
 class Repository {
-  Repository(this.read);
+  Repository(this.read, this.watch);
 
   final Reader read;
+  final T Function<T>(AlwaysAliveProviderListenable<T>) watch;
 
   Future<void> signUp({
     required String userName,
@@ -44,5 +49,24 @@ class Repository {
   }) async {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  Stream<List<RoomSummaryModel>> getRoomList(UserModel userModel) {
+    final uid = userModel.user.uid;
+
+    final streamTransformer = StreamTransformer<
+        QuerySnapshot<Map<String, dynamic>>,
+        List<RoomSummaryModel>>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value.docs.map(RoomSummaryModel.fromDoc).toList());
+      },
+    );
+
+    return FirebaseFirestore.instance
+        .collection('rooms')
+        .where('members', arrayContains: uid)
+        // .orderBy('lastMessageAt')
+        .snapshots()
+        .transform(streamTransformer);
   }
 }
