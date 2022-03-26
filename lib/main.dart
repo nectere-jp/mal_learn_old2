@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/screens/sign_in_screen.dart';
+import 'package:mal_learn/screens/sign_in_screen/sign_in_screen.dart';
 
 Future<void> main() async {
   // debugPaintSizeEnabled = true;
