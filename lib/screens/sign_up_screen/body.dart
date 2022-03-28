@@ -1,8 +1,7 @@
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/screens/sign_in_screen/submit_button.dart';
 import 'package:mal_learn/screens/sign_up_screen/link_to_sign_up_page.dart';
+import 'package:mal_learn/screens/sign_up_screen/submit_button.dart';
 import 'package:mal_learn/widgets/formFields/form_items.dart';
 
 class Body extends StatelessWidget {
