@@ -24,6 +24,7 @@ class EmailField extends ConsumerWidget {
       onChanged: (value) {
         ref.read(emailProvider.notifier).state = value;
       },
+      initialValue: ref.read(emailProvider),
     );
   }
 

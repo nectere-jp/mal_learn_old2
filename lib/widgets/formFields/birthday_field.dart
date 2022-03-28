@@ -10,6 +10,7 @@ class BirthdayField extends FormField<DateTime> {
     required WidgetRef ref,
   }) : super(
           key: key,
+          initialValue: ref.read(birthdayProvider),
           builder: _BirthdayFieldFunctions(
             context: context,
             ref: ref,

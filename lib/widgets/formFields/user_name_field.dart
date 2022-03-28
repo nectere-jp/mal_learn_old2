@@ -22,6 +22,7 @@ class UserNameField extends ConsumerWidget {
       onChanged: (value) {
         ref.read(userNameProvider.notifier).state = value;
       },
+      initialValue: ref.read(userNameProvider),
     );
   }
 

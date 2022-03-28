@@ -14,6 +14,7 @@ class IconPicker extends FormField<String> {
             ref: ref,
             context: context,
           ).builder,
+          initialValue: ref.read(iconPathProvider),
           validator: _IconPickerFunctions.birthdayValidator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
         );
@@ -27,6 +28,7 @@ class _IconPickerFunctions {
 
   Widget builder(FormFieldState<String> state) {
     final iconPath = ref.watch(iconPathProvider);
+
     return Column(
       children: [
         _IconButton(
