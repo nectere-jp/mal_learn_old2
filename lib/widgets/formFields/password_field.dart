@@ -23,6 +23,7 @@ class PasswordField extends ConsumerWidget {
       onChanged: (value) {
         ref.read(passwordProvider.notifier).state = value;
       },
+      initialValue: ref.read(passwordProvider),
     );
   }
 

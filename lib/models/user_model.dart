@@ -21,5 +21,6 @@ class UserModel {
     userName = data?['userName'] as String?;
     birthday = (data?['birthday'] as Timestamp?)?.toDate();
     iconPath = data?['iconPath'] as String?;
+    id = data?['id'] as String?;
   }
 }
