@@ -7,7 +7,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/models/room_summary_model.dart';
 import 'package:mal_learn/models/user_model.dart';
-import 'package:mal_learn/providers/user_provider.dart';
 
 class Repository {
   Repository(this.read, this.watch);

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/providers/form_data_providers.dart';
-import 'package:mal_learn/providers/repository_provider.dart';
-import 'package:mal_learn/screens/chat_list_screen/body.dart';
-import 'package:mal_learn/screens/chat_list_screen/chat_list_screen.dart';
+import 'package:mal_learn/screens/home_screen/chat_list_screen/body.dart';
 import 'package:mal_learn/screens/sign_in_screen/sign_in_screen.dart';
-import 'package:mal_learn/widgets/FormFields/form_items.dart';
-
 class SignUpScreen extends ConsumerWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +13,7 @@ class SignUpScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SafeArea(child: Body()),
+      body: const SafeArea(child: Body()),
     );
   }
 
@@ -28,7 +23,7 @@ class SignUpScreen extends ConsumerWidget {
         onPressed: () {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute<Scaffold>(
-              builder: (context) => SignInScreen(),
+              builder: (context) => const SignInScreen(),
             ),
           );
         },

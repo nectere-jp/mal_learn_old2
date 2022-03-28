@@ -11,7 +11,7 @@ class LinkToSignUpPage extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute<Scaffold>(
-              builder: (context) => SignUpScreen(),
+              builder: (context) => const SignUpScreen(),
             ),
           );
         },

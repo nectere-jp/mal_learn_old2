@@ -23,7 +23,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: SignInScreen(),
+      home: const SignInScreen(),
     );
   }
 }
