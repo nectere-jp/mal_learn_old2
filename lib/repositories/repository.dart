@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/functions/generate_id.dart';
 import 'package:mal_learn/models/room_summary_model.dart';
 import 'package:mal_learn/models/user_model.dart';
 
@@ -35,6 +36,7 @@ class Repository {
 
     await FirebaseFirestore.instance.collection('users').doc(uid).set(
       <String, dynamic>{
+        'id': generateId(8),
         'userName': userName,
         'birthday': Timestamp.fromDate(birthday),
         'iconPath': await task.ref.getDownloadURL(),
