@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/providers/user_provider.dart';
-import 'package:mal_learn/screens/home_screen/my_page_screen/add_friends.dart';
+import 'package:mal_learn/screens/home_screen/my_page_screen/add_friends_buttons.dart';
 import 'package:mal_learn/screens/home_screen/my_page_screen/user_profile.dart';
 
 class Body extends ConsumerWidget {
@@ -19,7 +19,7 @@ class Body extends ConsumerWidget {
       children: const [
         UserProfile(),
         SizedBox(height: 30),
-        AddFriends(),
+        AddFriendsButtons(),
       ],
     );
   }

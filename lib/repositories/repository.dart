@@ -6,14 +6,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/functions/generate_id.dart';
+import 'package:mal_learn/models/other_user_model.dart';
 import 'package:mal_learn/models/room_summary_model.dart';
 import 'package:mal_learn/models/user_model.dart';
+import 'package:mal_learn/providers/user_provider.dart';
 
 class Repository {
   Repository(this.read, this.watch);
 
   final Reader read;
   final T Function<T>(AlwaysAliveProviderListenable<T>) watch;
+
+  final streamTransformer = StreamTransformer<
+      QuerySnapshot<Map<String, dynamic>>, List<RoomSummaryModel>>.fromHandlers(
+    handleData: (value, sink) {
+      sink.add(value.docs.map(RoomSummaryModel.fromDoc).toList());
+    },
+  );
 
   Future<void> signUp({
     required String userName,
@@ -67,6 +76,28 @@ class Repository {
         .collection('rooms')
         .where('members', arrayContains: uid)
         // .orderBy('lastMessageAt')
+        .snapshots()
+        .transform(streamTransformer);
+  }
+
+  Stream<List<OtherUserModel>> getUserListWithId(String? id) {
+    if (id == null) {
+      return StreamController<List<OtherUserModel>>().stream;
+    }
+
+    final streamTransformer = StreamTransformer<
+        QuerySnapshot<Map<String, dynamic>>, List<OtherUserModel>>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value.docs.map(OtherUserModel.fromDoc).toList());
+      },
+    );
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isNotEqualTo: read(userModelProvider).value?.id)
+        .orderBy('id')
+        .startAt([id])
+        .endAt(['$id\uf8ff'])
         .snapshots()
         .transform(streamTransformer);
   }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/screens/home_screen/my_page_screen/show_add_friends_with_id_modal.dart';
 
-class AddFriends extends StatelessWidget {
-  const AddFriends({Key? key}) : super(key: key);
+class AddFriendsButtons extends ConsumerWidget {
+  const AddFriendsButtons({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -14,7 +16,7 @@ class AddFriends extends StatelessWidget {
         padding: const EdgeInsets.only(
           left: 30,
           right: 30,
-          top: 10,
+          top: 12,
           bottom: 20,
         ),
         child: Column(
@@ -33,7 +35,7 @@ class AddFriends extends StatelessWidget {
                 _AddFriendsButton(
                   icon: Icons.search,
                   text: 'ID検索',
-                  onPressed: () {},
+                  onPressed: () => addFriendsWithId(context, ref),
                 ),
                 const SizedBox(width: 10),
                 _AddFriendsButton(

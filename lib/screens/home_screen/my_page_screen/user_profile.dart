@@ -68,16 +68,7 @@ class _Icon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconPath = ref.read(userModelProvider).value!.iconPath;
-    late final ImageProvider icon;
-
-    if (iconPath == null) {
-      icon = const AssetImage('assets/images/default_icon.png');
-    } else {
-      icon = NetworkImage(
-        iconPath,
-      );
-    }
+    final icon = ref.watch(userModelProvider).value!.iconProvider!;
 
     return Positioned(
       top: 160,

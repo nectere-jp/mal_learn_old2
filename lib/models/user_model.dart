@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
 
 class UserModel {
   UserModel(this.user);
@@ -8,7 +9,7 @@ class UserModel {
   String? userName;
   String? id;
   DateTime? birthday;
-  String? iconPath;
+  ImageProvider? iconProvider;
 
   Future<void> fetchUserInfo() async {
     final document = await FirebaseFirestore.instance
@@ -20,7 +21,11 @@ class UserModel {
 
     userName = data?['userName'] as String?;
     birthday = (data?['birthday'] as Timestamp?)?.toDate();
-    iconPath = data?['iconPath'] as String?;
+    if (data?['iconPath'] != null) {
+      iconProvider = NetworkImage(data?['iconPath'] as String);
+    } else {
+      iconProvider = const AssetImage('assets/images/default_icon.png');
+    }
     id = data?['id'] as String?;
   }
 }
