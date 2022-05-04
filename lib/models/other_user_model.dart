@@ -20,9 +20,12 @@ class OtherUserModel {
       backgroundProvider =
           const AssetImage('assets/images/default_background.jpeg');
     }
+
+    uid = doc.reference.id;
   }
 
   String? userName;
+  late final String uid;
   String? id;
   ImageProvider? iconProvider;
   ImageProvider? backgroundProvider;

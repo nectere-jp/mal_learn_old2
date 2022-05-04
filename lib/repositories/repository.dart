@@ -49,6 +49,7 @@ class Repository {
         'userName': userName,
         'birthday': Timestamp.fromDate(birthday),
         'iconPath': await task.ref.getDownloadURL(),
+        'friends': <String>[],
       },
     );
   }
@@ -100,5 +101,13 @@ class Repository {
         .endAt(['$id\uf8ff'])
         .snapshots()
         .transform(streamTransformer);
+  }
+
+  void makeFriendsWith(String uid) {
+    final user = read(userModelProvider).value!;
+
+    FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+      'friends': FieldValue.arrayUnion(<String>[uid]),
+    });
   }
 }

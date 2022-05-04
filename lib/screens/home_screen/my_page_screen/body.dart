@@ -12,7 +12,7 @@ class Body extends ConsumerWidget {
     final userModel = ref.watch(userModelProvider).value;
 
     if (userModel == null) {
-      return const Center(child: Text('エラーが発生しました。アプリを再起動してください'));
+      return const CircularProgressIndicator();
     }
 
     return Column(

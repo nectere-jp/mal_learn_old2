@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/functions/show_other_user_modal.dart';
 import 'package:mal_learn/models/other_user_model.dart';
 import 'package:mal_learn/providers/form_data_providers.dart';
 import 'package:mal_learn/providers/search_result_providers.dart';
+import 'package:mal_learn/widgets/show_other_user_modal.dart';
 
 final resultProvider = StreamProvider<List<OtherUserModel>>((_) {
   return StreamController<List<OtherUserModel>>().stream;
