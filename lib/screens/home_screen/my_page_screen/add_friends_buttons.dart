@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/screens/home_screen/my_page_screen/show_add_friends_with_id_modal.dart';
+import 'package:mal_learn/screens/home_screen/my_page_screen/search_friends_by_id_modal.dart';
 
 class AddFriendsButtons extends ConsumerWidget {
   const AddFriendsButtons({Key? key}) : super(key: key);

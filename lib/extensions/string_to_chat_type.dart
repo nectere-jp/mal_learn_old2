@@ -1,4 +1,4 @@
-import 'package:mal_learn/models/room_summary_model.dart';
+import 'package:mal_learn/models/chat_room_model.dart';
 
 extension ToChatType on String {
   ChatType? toChatType() {

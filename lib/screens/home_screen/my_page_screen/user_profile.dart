@@ -9,6 +9,8 @@ class UserProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final icon = ref.watch(iconProvider).value;
+
     return Column(
       children: [
         SizedBox(
@@ -18,9 +20,7 @@ class UserProfile extends ConsumerWidget {
             alignment: Alignment.bottomCenter,
             children: [
               const BackgroundImage(),
-              UserIcon(
-                icon: ref.read(userModelProvider).value!.iconProvider,
-              ),
+              icon != null ? UserIcon(icon: icon) : Container(),
             ],
           ),
         ),
@@ -39,10 +39,10 @@ class _Id extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final id = ref.read(userModelProvider).value!.id;
+    final id = ref.watch(userIdProvider).value;
 
     return Text(
-      id,
+      id ?? '',
       style: TextStyle(
         fontSize: 12,
         color: Colors.teal.shade300,
@@ -56,10 +56,10 @@ class _UserName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userName = ref.read(userModelProvider).value!.userName;
+    final userName = ref.watch(userNameProvider).value;
 
     return Text(
-      userName,
+      userName ?? '',
       style: const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 25,

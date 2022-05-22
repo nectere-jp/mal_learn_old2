@@ -7,8 +7,8 @@ import 'package:mal_learn/providers/form_data_providers.dart';
 import 'package:mal_learn/providers/search_result_providers.dart';
 import 'package:mal_learn/widgets/show_other_user_modal.dart';
 
-final resultProvider = StreamProvider<List<OtherUserModel>>((_) {
-  return StreamController<List<OtherUserModel>>().stream;
+final resultProvider = StreamProvider<List<OtherUser>>((_) {
+  return StreamController<List<OtherUser>>().stream;
 });
 
 void addFriendsWithId(BuildContext context, WidgetRef ref) {
@@ -54,26 +54,32 @@ class _SearchResultList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Expanded(
-      child: ref.watch(searchResultStreamProvider).when(
-        data: (data) {
-          return ListView.builder(
-            itemCount: data.length,
-            padding: const EdgeInsets.only(top: 10, bottom: 25),
-            itemBuilder: (context, index) {
-              final userModel = data[index];
-              return _SearchResultListTile(userModel: userModel);
-            },
-          );
-        },
-        error: (error, _) {
-          return Center(child: Text(error.toString()));
-        },
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
+    final searchId = ref.watch(searchIdProvider);
+
+    if (searchId != null) {
+      return Expanded(
+        child: ref.watch(searchResultStreamProvider).when(
+          data: (data) {
+            return ListView.builder(
+              itemCount: data.length,
+              padding: const EdgeInsets.only(top: 10, bottom: 25),
+              itemBuilder: (context, index) {
+                final userModel = data[index];
+                return _SearchResultListTile(userModel: userModel);
+              },
+            );
+          },
+          error: (error, _) {
+            return Center(child: Text(error.toString()));
+          },
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
 
@@ -83,7 +89,7 @@ class _SearchResultListTile extends StatelessWidget {
     required this.userModel,
   }) : super(key: key);
 
-  final OtherUserModel userModel;
+  final OtherUser userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -92,13 +98,13 @@ class _SearchResultListTile extends StatelessWidget {
         aspectRatio: 1,
         child: ClipOval(
           child: Image(
-            image: userModel.iconProvider!,
+            image: userModel.iconProvider,
             fit: BoxFit.cover,
           ),
         ),
       ),
-      title: Text(userModel.userName ?? ''),
-      subtitle: Text(userModel.id!),
+      title: Text(userModel.userName),
+      subtitle: Text(userModel.id),
       onTap: () {
         showOtherUserModal(context, userModel);
       },

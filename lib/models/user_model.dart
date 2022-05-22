@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/rendering.dart';
 
-class UserModel {
-  UserModel(this.user);
+class User {
+  User(this.user);
 
-  final User user;
+  final firebase_auth.User user;
   late final String uid;
   late final String userName;
   late final String id;
@@ -39,8 +39,6 @@ class UserModel {
     }
 
     id = data?['id'] as String;
-    // ignore: flutter_style_todos
-    //TODO(ryuto) idが設定されていなかった時の対応,
 
     uid = user.uid;
   }

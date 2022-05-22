@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mal_learn/providers/user_provider.dart';
 import 'package:mal_learn/screens/home_screen/chat_list_screen/chat_list_screen.dart';
 import 'package:mal_learn/screens/home_screen/my_page_screen/my_page_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _pageViewController = PageController(initialPage: 1);
   var _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
+    final uid = ref.watch(uidProvider);
+    if (uid == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       body: PageView(
         controller: _pageViewController,

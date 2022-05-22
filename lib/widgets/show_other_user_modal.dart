@@ -4,7 +4,7 @@ import 'package:mal_learn/widgets/clipped_background_image.dart';
 import 'package:mal_learn/widgets/make_friends_button.dart';
 import 'package:mal_learn/widgets/user_icon.dart';
 
-void showOtherUserModal(BuildContext context, OtherUserModel user) {
+void showOtherUserModal(BuildContext context, OtherUser user) {
   showModalBottomSheet<DecoratedBox>(
     context: context,
     backgroundColor: Colors.transparent,
@@ -27,20 +27,20 @@ void showOtherUserModal(BuildContext context, OtherUserModel user) {
                 alignment: Alignment.bottomCenter,
                 children: [
                   const BackgroundImage(),
-                  UserIcon(icon: user.iconProvider!),
+                  UserIcon(icon: user.iconProvider),
                 ],
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              user.userName ?? '[ユーザー名が指定されていません]',
+              user.userName,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
             ),
             Text(
-              user.id ?? '[idが設定されていません]',
+              user.id,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.teal.shade300,

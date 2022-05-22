@@ -3,12 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/providers/user_provider.dart';
 
 class BackgroundImage extends ConsumerWidget {
-  const BackgroundImage({
-    Key? key,
-  }) : super(key: key);
+  const BackgroundImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final backgroundImage = ref.watch(backgroundImageProvider).value;
+
+    if (backgroundImage == null) {
+      return Container();
+    }
+
     return Positioned(
       top: 0,
       left: 0,
@@ -19,7 +23,7 @@ class BackgroundImage extends ConsumerWidget {
           clipper: _BackgroundClipper(),
           child: SizedBox(
             child: Image(
-              image: ref.read(userModelProvider).value!.backgroundProvider,
+              image: backgroundImage,
               fit: BoxFit.cover,
             ),
           ),

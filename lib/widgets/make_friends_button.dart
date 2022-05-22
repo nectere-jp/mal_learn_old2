@@ -10,7 +10,7 @@ class MakeFriendsButton extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
-  final OtherUserModel user;
+  final OtherUser user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
