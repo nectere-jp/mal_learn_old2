@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mal_learn/extensions/string_to_chat_type.dart';
 
-class RoomSummaryModel {
-  RoomSummaryModel.fromDoc(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+class ChatRoom {
+  ChatRoom.fromDoc(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data();
     name = data['name'] as String?;
     lastMessageAt = (data['lastMessageAt'] as Timestamp?)?.toDate();

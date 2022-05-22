@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final iconPathProvider = StateProvider<String?>((ref) => null);
-final userNameProvider = StateProvider<String?>((ref) => null);
-final emailProvider = StateProvider<String?>((ref) => null);
-final passwordProvider = StateProvider<String?>((ref) => null);
-final birthdayProvider = StateProvider<DateTime?>((ref) => null);
+final iconPathProvider = StateProvider<String?>((_) => null);
+final userNameProvider = StateProvider<String?>((_) => null);
+final emailProvider = StateProvider<String?>((_) => null);
+final passwordProvider = StateProvider<String?>((_) => null);
+final birthdayProvider = StateProvider<DateTime?>((_) => null);
+final searchIdProvider = StateProvider<String?>((_) => null);

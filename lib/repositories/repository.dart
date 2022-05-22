@@ -1,13 +1,7 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/functions/generate_id.dart';
-import 'package:mal_learn/models/room_summary_model.dart';
-import 'package:mal_learn/models/user_model.dart';
+import 'package:mal_learn/repositories/auth_repository.dart';
+import 'package:mal_learn/repositories/search_repository.dart';
+import 'package:mal_learn/repositories/user_repository.dart';
 
 class Repository {
   Repository(this.read, this.watch);
@@ -15,59 +9,23 @@ class Repository {
   final Reader read;
   final T Function<T>(AlwaysAliveProviderListenable<T>) watch;
 
-  Future<void> signUp({
-    required String userName,
-    required String email,
-    required String password,
-    required DateTime birthday,
-    required String iconPath,
-  }) async {
-    await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
+  late final authRepository = AuthRepository(read, watch);
+  late final userRepository = UserRepository(read, watch);
 
-    final uid = FirebaseAuth.instance.currentUser!.uid;
+  late final searchRepository = SearchRepository(read, watch, userRepository);
 
-    final iconNamEextension = iconPath.split('/').last.split('.').last;
-    final task = await FirebaseStorage.instance
-        .ref()
-        .child('users/$uid')
-        .child('icon.$iconNamEextension')
-        .putFile(File(iconPath));
+  //auth
+  late final signIn = authRepository.signIn;
+  late final signUp = authRepository.signUp;
 
-    await FirebaseFirestore.instance.collection('users').doc(uid).set(
-      <String, dynamic>{
-        'id': generateId(8),
-        'userName': userName,
-        'birthday': Timestamp.fromDate(birthday),
-        'iconPath': await task.ref.getDownloadURL(),
-      },
-    );
-  }
+  //user
+  late final fetchUserId = userRepository.fetchUserId;
+  late final fetchUserName = userRepository.fetchUserName;
+  late final fetchUserIcon = userRepository.fetchUserIcon;
+  late final fetchUserBackgroundImage = userRepository.fetchUserBackgroundImage;
+  late final makeFriendsWith = userRepository.makeFriendsWith;
+  late final fetchJoinedChatRoomList = userRepository.fetchJoinedChatRoomList;
 
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
-  }
-
-  Stream<List<RoomSummaryModel>> getRoomList(UserModel userModel) {
-    final uid = userModel.user.uid;
-
-    final streamTransformer = StreamTransformer<
-        QuerySnapshot<Map<String, dynamic>>,
-        List<RoomSummaryModel>>.fromHandlers(
-      handleData: (value, sink) {
-        sink.add(value.docs.map(RoomSummaryModel.fromDoc).toList());
-      },
-    );
-
-    return FirebaseFirestore.instance
-        .collection('rooms')
-        .where('members', arrayContains: uid)
-        // .orderBy('lastMessageAt')
-        .snapshots()
-        .transform(streamTransformer);
-  }
+  //search
+  late final searchUserById = searchRepository.searchUserById;
 }

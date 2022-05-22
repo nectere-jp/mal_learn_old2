@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mal_learn/models/room_summary_model.dart';
+import 'package:mal_learn/models/chat_room_model.dart';
 
 class ChatListTile extends StatelessWidget {
   const ChatListTile(this.room, {Key? key}) : super(key: key);
 
-  final RoomSummaryModel room;
+  final ChatRoom room;
 
   @override
   Widget build(BuildContext context) {
