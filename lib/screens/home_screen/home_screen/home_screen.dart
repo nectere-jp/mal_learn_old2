@@ -17,7 +17,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final uid = ref.watch(uidProvider);
+    final uid = ref.watch(userProvider).value?.uid;
     if (uid == null) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),

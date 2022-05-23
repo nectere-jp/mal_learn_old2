@@ -12,7 +12,7 @@ class Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repository = ref.read(repositoryProvider);
-    final uid = ref.watch(uidProvider);
+    final uid = ref.watch(userProvider).value!.uid;
 
     return Column(
       children: [
@@ -23,7 +23,7 @@ class Body extends ConsumerWidget {
         const SizedBox(height: 10),
         Expanded(
           child: StreamBuilder(
-            stream: repository.fetchJoinedChatRoomList(uid!),
+            stream: repository.fetchJoinedChatRoomList(uid),
             builder: (context, AsyncSnapshot<List<ChatRoom>> snapshot) {
               if (snapshot.hasData) {
                 final data = snapshot.data!;

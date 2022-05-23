@@ -9,7 +9,7 @@ class UserProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final icon = ref.watch(iconProvider).value;
+    final icon = ref.watch(userProvider).value?.iconProvider;
 
     return Column(
       children: [
@@ -39,7 +39,7 @@ class _Id extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final id = ref.watch(userIdProvider).value;
+    final id = ref.watch(userProvider).value?.id;
 
     return Text(
       id ?? '',
@@ -56,7 +56,7 @@ class _UserName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userName = ref.watch(userNameProvider).value;
+    final userName = ref.watch(userProvider).value?.userName;
 
     return Text(
       userName ?? '',

@@ -9,7 +9,7 @@ class Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = ref.watch(uidProvider);
+    final uid = ref.watch(userProvider).value?.uid;
 
     if (uid == null) {
       return const CircularProgressIndicator();
