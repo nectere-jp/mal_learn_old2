@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mal_learn/screens/home_screen/my_page_screen/search_friends_by_id_modal.dart';
+import 'package:mal_learn/screens/my_page_screen/search_friends_by_id_modal.dart';
 
-class AddFriendsButtons extends ConsumerWidget {
-  const AddFriendsButtons({Key? key}) : super(key: key);
+class SearchFriendsButtons extends ConsumerWidget {
+  const SearchFriendsButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

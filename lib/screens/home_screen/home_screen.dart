@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/providers/user_provider.dart';
-import 'package:mal_learn/screens/home_screen/chat_list_screen/chat_list_screen.dart';
-import 'package:mal_learn/screens/home_screen/my_page_screen/my_page_screen.dart';
+import 'package:mal_learn/screens/chat_list_screen/chat_list_screen.dart';
+import 'package:mal_learn/screens/my_page_screen/my_page_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -3,8 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/models/chat_room_model.dart';
 import 'package:mal_learn/providers/repository_provider.dart';
 import 'package:mal_learn/providers/user_provider.dart';
-import 'package:mal_learn/screens/home_screen/chat_list_screen/chat_list_tile.dart';
-import 'package:mal_learn/screens/home_screen/chat_list_screen/search_field.dart';
+import 'package:mal_learn/screens/chat_list_screen/app_bar.dart';
+import 'package:mal_learn/screens/chat_list_screen/chat_list_tile.dart';
+import 'package:mal_learn/screens/chat_list_screen/search_field.dart';
+
+class ChatListScreen extends ConsumerWidget {
+  const ChatListScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const Scaffold(
+      appBar: MyAppBar(),
+      body: Body(),
+    );
+  }
+}
 
 class Body extends ConsumerWidget {
   const Body({Key? key}) : super(key: key);
