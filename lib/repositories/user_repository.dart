@@ -49,7 +49,7 @@ class UserRepository {
   }
 
   void makeFriendsWith(String uid) {
-    final uid = read(uidProvider)!;
+    final uid = read(userProvider).value!.uid;
 
     FirebaseFirestore.instance.collection('users').doc(uid).update({
       'friends': FieldValue.arrayUnion(<String>[uid])

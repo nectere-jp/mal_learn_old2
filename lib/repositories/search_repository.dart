@@ -21,7 +21,7 @@ class SearchRepository {
       },
     );
 
-    final uid = read(uidProvider)!;
+    final uid = read(userProvider).value!.uid;
     final currentUserId = await userRepository.fetchUserId(uid);
 
     return FirebaseFirestore.instance

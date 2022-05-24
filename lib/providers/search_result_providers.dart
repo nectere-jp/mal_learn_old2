@@ -16,7 +16,7 @@ final searchResultStreamProvider = StreamProvider((ref) {
     },
   );
 
-  final currentUserId = ref.read(userIdProvider).value;
+  final currentUserId = ref.read(userProvider).value!.id;
 
   return FirebaseFirestore.instance
       .collection('users')

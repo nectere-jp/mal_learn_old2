@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/providers/form_data_providers.dart';
 import 'package:mal_learn/providers/repository_provider.dart';
-import 'package:mal_learn/screens/home_screen/home_screen/home_screen.dart';
+import 'package:mal_learn/screens/home_screen/home_screen.dart';
 import 'package:mal_learn/widgets/formFields/submit_button.dart';
 
 class MySubmitButton extends ConsumerWidget {

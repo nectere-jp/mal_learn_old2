@@ -7,7 +7,7 @@ class BackgroundImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final backgroundImage = ref.watch(backgroundImageProvider).value;
+    final backgroundImage = ref.watch(userProvider).value?.backgroundProvider;
 
     if (backgroundImage == null) {
       return Container();
