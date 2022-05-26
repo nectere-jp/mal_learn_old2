@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mal_learn/models/chat_room_model.dart';
+import 'package:mal_learn/screens/chat_room_screen/chat_room_screen.dart';
 
 class ChatListTile extends StatelessWidget {
   const ChatListTile(this.room, {Key? key}) : super(key: key);
@@ -27,7 +28,13 @@ class ChatListTile extends StatelessWidget {
           style: TextStyle(color: Colors.teal.shade300),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<Scaffold>(
+            builder: (context) => ChatRoomScreen(room.id),
+          ),
+        );
+      },
       contentPadding: const EdgeInsets.symmetric(horizontal: 30),
     );
   }

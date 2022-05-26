@@ -47,7 +47,7 @@ class Body extends ConsumerWidget {
                   },
                 );
               } else {
-                return const Center(child: Text('Loading'));
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),

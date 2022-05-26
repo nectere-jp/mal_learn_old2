@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mal_learn/repositories/auth_repository.dart';
+import 'package:mal_learn/repositories/message_repository.dart';
 import 'package:mal_learn/repositories/search_repository.dart';
 import 'package:mal_learn/repositories/user_repository.dart';
 
@@ -11,8 +12,8 @@ class Repository {
 
   late final authRepository = AuthRepository(read, watch);
   late final userRepository = UserRepository(read, watch);
-
   late final searchRepository = SearchRepository(read, watch, userRepository);
+  late final messageRepository = MessageRepository(read, watch);
 
   //auth
   late final signIn = authRepository.signIn;
@@ -28,4 +29,7 @@ class Repository {
 
   //search
   late final searchUserById = searchRepository.searchUserById;
+
+  //message
+  late final fetchMessages = messageRepository.fetchMessages;
 }
