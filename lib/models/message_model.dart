@@ -1,7 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class Message {
   Message({
@@ -24,12 +21,4 @@ class Message {
   late final String sentBy;
   late final DateTime sentAt;
   late final String text;
-
-  types.TextMessage toChatUiMessage() {
-    return types.TextMessage(
-      id: id,
-      author: types.User(id: sentBy, firstName: sentBy),
-      text: text,
-    );
-  }
 }

@@ -67,7 +67,7 @@ class UserRepository {
     return FirebaseFirestore.instance
         .collection('rooms')
         .where('members', arrayContains: uid)
-        // .orderBy('lastMessageAt')
+        .orderBy('lastMessageAt', descending: true)
         .snapshots()
         .transform(transformer);
   }

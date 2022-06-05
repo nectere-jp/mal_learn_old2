@@ -22,7 +22,7 @@ class MessageRepository {
         .collection('rooms')
         .doc(id)
         .collection('messages')
-        // .orderBy('time', descending: true)
+        .orderBy('sentAt', descending: true)
         .snapshots()
         .transform(transformer);
   }
