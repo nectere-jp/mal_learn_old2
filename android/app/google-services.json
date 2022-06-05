@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "47070046795",
+    "project_id": "mal-learn",
+    "storage_bucket": "mal-learn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47070046795:android:ccba92dbbd799eb1f3fbce",
+        "android_client_info": {
+          "package_name": "jp.nectere.mallearn.mal_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47070046795-97uhkbdis69s8fubb3vvrak0ls6vjb55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYU-jpumG41XSzGdqkXDxqK-b8XoyBwT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47070046795-97uhkbdis69s8fubb3vvrak0ls6vjb55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "47070046795-j4vuah8a9qf37e80l338ss2bhnia0hjp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.nectere.mal-learn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

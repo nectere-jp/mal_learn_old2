@@ -22,6 +22,7 @@ class ChatMessages extends ConsumerWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 reverse: true,
                 itemCount: data.length,
                 itemBuilder: (context, index) {
