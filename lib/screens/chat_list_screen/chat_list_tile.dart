@@ -31,7 +31,7 @@ class ChatListTile extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute<Scaffold>(
-            builder: (context) => ChatRoomScreen(room.id),
+            builder: (context) => ChatRoomScreen(room),
           ),
         );
       },

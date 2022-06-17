@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mal_learn/models/chat_room_model.dart';
 import 'package:mal_learn/screens/chat_room_screen/app_bar.dart';
 import 'package:mal_learn/screens/chat_room_screen/chat_input.dart';
 import 'package:mal_learn/screens/chat_room_screen/chat_messages.dart';
 
 class ChatRoomScreen extends StatelessWidget {
-  const ChatRoomScreen(this.id, {Key? key}) : super(key: key);
+  const ChatRoomScreen(this.room, {Key? key}) : super(key: key);
 
-  final String id;
+  final ChatRoom room;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(),
-      body: Body(id),
+      appBar: MyAppBar(room.name!),
+      body: Body(room.id),
     );
   }
 }

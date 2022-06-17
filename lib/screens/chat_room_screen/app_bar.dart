@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+  const MyAppBar(this.name, {Key? key}) : super(key: key);
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Hello'),
+      title: Text(name),
       elevation: 0,
       backgroundColor: Theme.of(context).canvasColor,
       centerTitle: false,
